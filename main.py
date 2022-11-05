@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from utils import data_dict
 
 app = FastAPI()
-pickle_in = open("svm_classifier.pkl","rb")
+pickle_in = open("models/mlp_classifier.pkl", "rb")
 classifier=pickle.load(pickle_in)
 
 class Symptoms(BaseModel):
@@ -15,7 +15,7 @@ class Symptoms(BaseModel):
 
 @app.get('/')
 def index():
-    return {'message': 'Hello, World'}
+    return {'message': 'Hi, this is an API to predict diseases given the symptoms'}
 
 @app.post('/predict/')
 def predict_disease(symptoms: Symptoms):
