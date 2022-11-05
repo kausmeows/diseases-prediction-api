@@ -10,8 +10,6 @@ app = FastAPI()
 pickle_in = open("svm_classifier.pkl","rb")
 classifier=pickle.load(pickle_in)
 
-
-
 class Symptoms(BaseModel):
     symptoms: str
 
@@ -27,7 +25,7 @@ def predict_disease(symptoms: Symptoms):
     # creating input data for the models
     input_data = [0] * len(data_dict["symptom_index"])
     for symptom in symptoms:
-        index = data_dict["symptom_index"][symptom]
+        index = data_dict["symptom_index"][symptom.capitalize()]
         input_data[index] = 1
          
     # reshaping the input data and converting it
